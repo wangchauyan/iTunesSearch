@@ -1,0 +1,3 @@
+package idv.chauyan.itunessearch.presentation
+
+interface BasePresenter
