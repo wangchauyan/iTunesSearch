@@ -8,8 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import idv.chauyan.itunessearch.R
+import idv.chauyan.itunessearch.domain.DomainRepository
+import idv.chauyan.itunessearch.domain.usecases.GetArtWorks
 import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 import idv.chauyan.itunessearch.presentation.screen.artworklist.ArtWorkListContract
+import idv.chauyan.itunessearch.presentation.screen.artworklist.model.ArtWorkListModel
+import idv.chauyan.itunessearch.presentation.screen.artworklist.presenter.ArtWorkListPresenter
 import idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater.ArtWorkListAdapter
 
 class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
@@ -29,12 +33,19 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    val model = ArtWorkListModel(GetArtWorks(DomainRepository.create(false)))
+    setPresenter(ArtWorkListPresenter(model, this))
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
     // Inflate the layout for this fragment
     return inflater.inflate(R.layout.fragment_art_work_list, container, false)
+  }
+
+  override fun onResume() {
+    super.onResume()
+    this.presenter.getArtWorks()
   }
 
   /**
