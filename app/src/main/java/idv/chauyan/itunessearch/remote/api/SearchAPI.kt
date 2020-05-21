@@ -2,16 +2,23 @@ package idv.chauyan.itunessearch.remote.api
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import idv.chauyan.itunessearch.remote.model.ArtWork
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.QueryMap
 
 interface SearchAPI {
 
-  suspend fun getArtWorks()
+  @GET("search?")
+  @JvmSuppressWildcards
+  suspend fun getArtWorks(
+    @QueryMap params: Map<String, String>
+  ): List<ArtWork>
 
   companion object {
-    private val localServer = "https://127.0.0.1"
-    private val remoteServer = "https://itunes.apple.com/search?"
+    private const val localServer = "https://127.0.0.1"
+    private const val remoteServer = "https://itunes.apple.com/"
     fun create(debug: Boolean): SearchAPI {
       val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

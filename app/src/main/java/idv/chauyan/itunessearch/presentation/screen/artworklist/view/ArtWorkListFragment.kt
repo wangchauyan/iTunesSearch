@@ -1,18 +1,31 @@
 package idv.chauyan.itunessearch.presentation.screen.artworklist.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import idv.chauyan.itunessearch.R
+import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 import idv.chauyan.itunessearch.presentation.screen.artworklist.ArtWorkListContract
+import idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater.ArtWorkListAdapter
 
 class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
 
-  // TODO: Rename and change types of parameters
-  private var param1: String? = null
-  private var param2: String? = null
+  // customize the recyclerview layout
+  private var columnCount = 1
+  private var refreshing = false
+  private var loadMore = false
+  private val pageSize = 10
+  private var since = 0
+
+  private var listener: ArtWorkListContract.View.ArtWorkListBehavior? = null
+  private lateinit var artWorkListAdapter: ArtWorkListAdapter
+  private lateinit var presenter: ArtWorkListContract.Presenter
+  private lateinit var artWorkList: RecyclerView
+  private lateinit var refresher: SwipeRefreshLayout
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -28,9 +41,13 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
    * Art work list view contract
    */
   override fun setPresenter(presenter: ArtWorkListContract.Presenter) {
+    this.presenter = presenter
   }
 
-  override fun updateArtWorkList() {
+  override fun updateArtWorkList(artWorks: List<PresentationArtWork>) {
+    artWorks.forEach {
+      println("track name : ".plus(it.trackName))
+    }
   }
 
 }

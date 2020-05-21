@@ -2,11 +2,12 @@ package idv.chauyan.itunessearch.presentation.screen.artworklist
 
 import idv.chauyan.itunessearch.presentation.BasePresenter
 import idv.chauyan.itunessearch.presentation.BaseView
+import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 
 interface ArtWorkListContract {
 
   interface Model {
-    suspend fun getArtWorks()
+    suspend fun getArtWorks(): List<PresentationArtWork>
   }
 
   interface Presenter : BasePresenter {
@@ -14,10 +15,10 @@ interface ArtWorkListContract {
   }
 
   interface View : BaseView<Presenter> {
-    fun updateArtWorkList()
+    fun updateArtWorkList(artworks: List<PresentationArtWork>)
 
     interface ArtWorkListBehavior {
-      fun onSelectedArtWork()
+      fun onSelectedArtWork(artWork: PresentationArtWork)
     }
   }
 }
