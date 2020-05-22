@@ -70,6 +70,27 @@ class ArtWorkListAdapter(
     }
   }
 
+  fun updateArtworks(
+    data: List<PresentationArtWork>,
+    refreshing: Boolean
+  ) {
+    if (refreshing) artWorks.clear()
+    artWorks.addAll(data)
+    notifyDataSetChanged()
+  }
+
+  fun showLoading() {
+    artWorks.add(
+      PresentationArtWork()
+    )
+    notifyItemInserted(artWorks.size - 1)
+  }
+
+  fun dismissLoading() {
+    artWorks.removeAt(artWorks.lastIndex)
+    notifyItemRemoved(artWorks.size)
+  }
+
   /**
    * Art work item
    */

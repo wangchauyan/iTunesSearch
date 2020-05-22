@@ -1,10 +1,13 @@
 package idv.chauyan.itunessearch.presentation.screen.artworklist.view
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import idv.chauyan.itunessearch.R
@@ -29,7 +32,7 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
   private lateinit var artWorkListAdapter: ArtWorkListAdapter
   private lateinit var presenter: ArtWorkListContract.Presenter
   private lateinit var artWorkList: RecyclerView
-  private lateinit var refresher: SwipeRefreshLayout
+  private lateinit var artWorkRefresher: SwipeRefreshLayout
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -37,10 +40,62 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
     setPresenter(ArtWorkListPresenter(model, this))
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?): View? {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_art_work_list, container, false)
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    val view = inflater.inflate(
+      R.layout.fragment_art_work_list,
+      container,
+      false
+    )
+
+    artWorkList = view.findViewById(R.id.list)
+    artWorkList.apply {
+      // init artwork list adapter
+      artWorkListAdapter = ArtWorkListAdapter(arrayListOf(), listener)
+
+      // properties initialization
+      adapter = artWorkListAdapter
+      layoutManager = when {
+        columnCount <= 1 -> LinearLayoutManager(activity)
+        else -> GridLayoutManager(activity, columnCount)
+      }
+
+      // get the scroll position changed event
+      addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+          super.onScrolled(recyclerView, dx, dy)
+
+          // just ignore the GridLayoutManager case here
+          val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+          val totalItems = layoutManager.itemCount
+          val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+          if (!loadMore && totalItems >= pageSize && totalItems <= lastVisibleItem + 1) {
+            loadMore = true
+
+            Handler().post {
+              artWorkListAdapter.showLoading()
+            }
+            Handler().postDelayed({
+              // retrieve new artworks
+            }, 500)
+          }
+        }
+      })
+    }
+
+    // set up artwork refresher
+    artWorkRefresher = view.findViewById(R.id.refresher)
+    artWorkRefresher.apply {
+      setOnRefreshListener {
+      }
+    }
+
+
+    return view
   }
 
   override fun onResume() {
@@ -56,9 +111,10 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
   }
 
   override fun updateArtWorkList(artWorks: List<PresentationArtWork>) {
-    artWorks.forEach {
-      println("track name : ".plus(it.trackName))
+    if (loadMore) {
+      loadMore = false
+      artWorkListAdapter.dismissLoading()
     }
+    artWorkListAdapter.updateArtworks(artWorks, false)
   }
-
 }
