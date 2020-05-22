@@ -4,4 +4,7 @@
   <!-- Strings used for fragments for navigation -->
   <string name="artwork_list_fragment">ArtWork List Fragment</string>
   <string name="artwork_detail_fragment">ArtWork Detail Fragment</string>
+
+  <!-- Strings used for fragments -->
+  <string name="artwork_no_network">No network connection!</string>
 </resources>

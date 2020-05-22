@@ -34,6 +34,7 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
   private lateinit var presenter: ArtWorkListContract.Presenter
   private lateinit var artWorkList: RecyclerView
   private lateinit var artWorkRefresher: SwipeRefreshLayout
+  private lateinit var artWorkNetworkView: ViewGroup
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -98,19 +99,27 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
     }
 
 
+    artWorkNetworkView = view.findViewById(R.id.network_condition)
+
     return view
   }
 
   override fun onResume() {
     super.onResume()
     context?.let {
-      if (ConditionChecker.isNetworkAvailable(it))
+      if (ConditionChecker.isNetworkAvailable(it)) {
+        artWorkRefresher.visibility = View.VISIBLE
+        artWorkNetworkView.visibility = View.GONE
+
         this.presenter.getArtWorks()
-      else
+      } else {
+        artWorkRefresher.visibility = View.GONE
+        artWorkNetworkView.visibility = View.VISIBLE
         ErrorHandler.showErrorMessage(it, ErrorHandler.ErrorType.NetworkConnectError(
           ErrorHandler.ErrorCode.NetworkError,
           "No network connection!"
         ))
+      }
     }
   }
 
