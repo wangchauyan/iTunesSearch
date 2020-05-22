@@ -1,7 +1,6 @@
 package idv.chauyan.itunessearch.presentation.screen.artworklist.view
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,8 @@ import idv.chauyan.itunessearch.presentation.screen.artworklist.ArtWorkListContr
 import idv.chauyan.itunessearch.presentation.screen.artworklist.model.ArtWorkListModel
 import idv.chauyan.itunessearch.presentation.screen.artworklist.presenter.ArtWorkListPresenter
 import idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater.ArtWorkListAdapter
+import idv.chauyan.itunessearch.presentation.utils.ConditionChecker
+import idv.chauyan.itunessearch.presentation.utils.ErrorHandler
 
 class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
 
@@ -68,7 +69,7 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
           super.onScrolled(recyclerView, dx, dy)
 
-          // just ignore the GridLayoutManager case here
+          /*
           val layoutManager = recyclerView.layoutManager as LinearLayoutManager
           val totalItems = layoutManager.itemCount
           val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
@@ -83,6 +84,7 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
               // retrieve new artworks
             }, 500)
           }
+           */
         }
       })
     }
@@ -91,6 +93,7 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
     artWorkRefresher = view.findViewById(R.id.refresher)
     artWorkRefresher.apply {
       setOnRefreshListener {
+        artWorkRefresher.isRefreshing = false
       }
     }
 
@@ -100,7 +103,15 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
 
   override fun onResume() {
     super.onResume()
-    this.presenter.getArtWorks()
+    context?.let {
+      if (ConditionChecker.isNetworkAvailable(it))
+        this.presenter.getArtWorks()
+      else
+        ErrorHandler.showErrorMessage(it, ErrorHandler.ErrorType.NetworkConnectError(
+          ErrorHandler.ErrorCode.NetworkError,
+          "No network connection!"
+        ))
+    }
   }
 
   /**
