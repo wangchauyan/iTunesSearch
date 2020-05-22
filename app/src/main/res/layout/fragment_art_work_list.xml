@@ -11,5 +11,6 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".presentation.screen.restaurant_list.view.RestaurantListFragment" />
+    tools:context=".presentation.screen.restaurant_list.view.RestaurantListFragment"
+    tools:listitem="@layout/fragment_art_work_item" />
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
