@@ -4,35 +4,43 @@ import idv.chauyan.itunessearch.data.model.DataArtWork
 import idv.chauyan.itunessearch.domain.model.DomainArtWork
 
 fun DomainArtWork.toDataModel(): DataArtWork = DataArtWork(
-  trackId,
+  wrapperType,
+  collectionType,
   artistId,
   collectionId,
-  kind,
-  wrapperType,
+  amgArtistId,
   artistName,
   collectionName,
-  trackName,
-  artWorkThumbnailSmall,
-  artWorkThumbnailLarge,
-  artWorkTrial,
+  artistViewUrl,
+  collectionViewUrl,
+  collectionPrice,
+  trackCount,
+  copyright,
   country,
+  currency,
+  releaseDate,
   primaryGenreName,
-  isStreamable
+  artWorkThumbnailSmall,
+  artWorkThumbnailLarge
 )
 
 fun DataArtWork.toDomainModel(): DomainArtWork = DomainArtWork(
-  trackId,
+  wrapperType,
+  collectionType,
   artistId,
   collectionId,
-  kind,
-  wrapperType,
+  amgArtistId,
   artistName,
   collectionName,
-  trackName,
-  artWorkThumbnailSmall,
-  artWorkThumbnailLarge,
-  artWorkTrial,
+  artistViewUrl,
+  collectionViewUrl,
+  collectionPrice,
+  trackCount,
+  copyright,
   country,
+  currency,
+  releaseDate,
   primaryGenreName,
-  isStreamable
+  artWorkThumbnailSmall,
+  artWorkThumbnailLarge
 )

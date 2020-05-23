@@ -64,7 +64,7 @@ class ArtWorkSplashFragment : Fragment() {
     activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
     delayedHide(100)
-    delayedEnter(200)
+    delayedEnter(500)
   }
 
   override fun onPause() {

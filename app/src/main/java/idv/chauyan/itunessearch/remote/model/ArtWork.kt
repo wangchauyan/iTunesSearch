@@ -5,26 +5,28 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class ArtWork(
-  val trackId: String?,
+  val wrapperType: String,
+  val collectionType: String,
   val artistId: String?,
   val collectionId: String?,
-  val kind: String?,
-  val wrapperType: String,
+  val amgArtistId: String?,
   val artistName: String,
-  val collectionName: String?,
-  val trackName: String?,
+  val collectionName: String,
+  val artistViewUrl: String,
+  val collectionViewUrl: String,
+  val collectionPrice: Double,
+  val trackCount: Long,
+  val copyright: String,
+  val country: String,
+  val currency: String,
+  val releaseDate: String,
+  val primaryGenreName: String,
 
   @Json(name = "artworkUrl60")
   val artWorkThumbnailSmall: String,
 
   @Json(name = "artworkUrl100")
-  val artWorkThumbnailLarge: String,
-
-  @Json(name = "previewUrl")
-  val artWorkTrial: String?,
-  val country: String,
-  val primaryGenreName: String,
-  val isStreamable: Boolean?
+  val artWorkThumbnailLarge: String
 )
 
 @JsonClass(generateAdapter = true)

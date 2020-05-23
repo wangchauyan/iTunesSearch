@@ -1,18 +1,22 @@
 package idv.chauyan.itunessearch.domain.model
 
 data class DomainArtWork(
-  val trackId: String?,
+  val wrapperType: String,
+  val collectionType: String,
   val artistId: String?,
   val collectionId: String?,
-  val kind: String?,
-  val wrapperType: String,
+  val amgArtistId: String?,
   val artistName: String,
-  val collectionName: String?,
-  val trackName: String?,
-  val artWorkThumbnailSmall: String,
-  val artWorkThumbnailLarge: String,
-  val artWorkTrial: String?,
+  val collectionName: String,
+  val artistViewUrl: String,
+  val collectionViewUrl: String,
+  val collectionPrice: Double,
+  val trackCount: Long,
+  val copyright: String,
   val country: String,
+  val currency: String,
+  val releaseDate: String,
   val primaryGenreName: String,
-  val isStreamable: Boolean?
+  val artWorkThumbnailSmall: String,
+  val artWorkThumbnailLarge: String
 )

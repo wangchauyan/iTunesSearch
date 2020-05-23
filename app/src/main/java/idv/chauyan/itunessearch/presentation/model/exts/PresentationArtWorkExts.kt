@@ -4,35 +4,43 @@ import idv.chauyan.itunessearch.domain.model.DomainArtWork
 import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 
 fun DomainArtWork.toPresentationModel(): PresentationArtWork = PresentationArtWork(
-  trackId,
+  wrapperType,
+  collectionType,
   artistId,
   collectionId,
-  kind,
-  wrapperType,
+  amgArtistId,
   artistName,
   collectionName,
-  trackName,
-  artWorkThumbnailSmall,
-  artWorkThumbnailLarge,
-  artWorkTrial,
+  artistViewUrl,
+  collectionViewUrl,
+  collectionPrice,
+  trackCount,
+  copyright,
   country,
+  currency,
+  releaseDate,
   primaryGenreName,
-  isStreamable
+  artWorkThumbnailSmall,
+  artWorkThumbnailLarge
 )
 
 fun PresentationArtWork.toDomainModel(): DomainArtWork = DomainArtWork(
-  trackId,
+  wrapperType,
+  collectionType,
   artistId,
   collectionId,
-  kind,
-  wrapperType,
+  amgArtistId,
   artistName,
   collectionName,
-  trackName,
-  artWorkThumbnailSmall,
-  artWorkThumbnailLarge,
-  artWorkTrial,
+  artistViewUrl,
+  collectionViewUrl,
+  collectionPrice,
+  trackCount,
+  copyright,
   country,
+  currency,
+  releaseDate,
   primaryGenreName,
-  isStreamable
+  artWorkThumbnailSmall,
+  artWorkThumbnailLarge
 )

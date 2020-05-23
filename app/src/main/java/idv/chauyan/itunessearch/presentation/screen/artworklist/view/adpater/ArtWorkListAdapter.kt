@@ -59,12 +59,7 @@ class ArtWorkListAdapter(
         .load(item.artWorkThumbnailSmall)
         .into(holder.artWorkLogo)
       holder.artistName.text = item.artistName
-      item.trackName?.let {
-        holder.trackName.text = item.collectionName.plus(" - ").plus(item.trackName)
-      } ?: kotlin.run {
-        holder.trackName.text = item.collectionName
-      }
-
+      holder.trackName.text = item.collectionName
 
       with(holder.view) {
         tag = item
