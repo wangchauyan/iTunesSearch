@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,10 @@ import idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater.Art
 import idv.chauyan.itunessearch.presentation.utils.ConditionChecker
 import idv.chauyan.itunessearch.presentation.utils.ErrorHandler
 
-class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
+class ArtWorkListFragment :
+  Fragment(),
+  ArtWorkListContract.View,
+  ArtWorkListContract.View.ArtWorkListBehavior {
 
   // customize the recyclerview layout
   private var columnCount = 1
@@ -29,7 +33,6 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
   private val pageSize = 10
   private var since = 0
 
-  private var listener: ArtWorkListContract.View.ArtWorkListBehavior? = null
   private lateinit var artWorkListAdapter: ArtWorkListAdapter
   private lateinit var presenter: ArtWorkListContract.Presenter
   private lateinit var artWorkList: RecyclerView
@@ -56,7 +59,7 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
     artWorkList = view.findViewById(R.id.list)
     artWorkList.apply {
       // init artwork list adapter
-      artWorkListAdapter = ArtWorkListAdapter(arrayListOf(), listener)
+      artWorkListAdapter = ArtWorkListAdapter(arrayListOf(), this@ArtWorkListFragment)
 
       // properties initialization
       adapter = artWorkListAdapter
@@ -124,7 +127,7 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
   }
 
   /**
-   * Art work list view contract
+   * Artwork list view contract
    */
   override fun setPresenter(presenter: ArtWorkListContract.Presenter) {
     this.presenter = presenter
@@ -136,5 +139,9 @@ class ArtWorkListFragment : Fragment(), ArtWorkListContract.View {
       artWorkListAdapter.dismissLoading()
     }
     artWorkListAdapter.updateArtworks(artWorks, false)
+  }
+
+  override fun onSelectedArtWork(artWork: PresentationArtWork) {
+    findNavController().navigate(R.id.action_ArtworkListFragment_to_ArtWorkDetailFragment)
   }
 }
