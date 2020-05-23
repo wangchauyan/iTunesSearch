@@ -11,7 +11,7 @@ data class PresentationArtWork(
   val trackName: String? = null,
   val artWorkThumbnailSmall: String = "",
   val artWorkThumbnailLarge: String = "",
-  val artWorkTrial: String = "",
+  val artWorkTrial: String? = "",
   val country: String = "",
   val primaryGenreName: String = "",
   val isStreamable: Boolean? = false

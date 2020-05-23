@@ -9,6 +9,9 @@ class RemoteDataImpl(
 ) : RemoteData {
 
   override suspend fun getArtWorks() = api.getArtWorks(
-    mapOf("term" to "jack")
+    mapOf(
+      "term" to "Swift",
+      "entity" to "album"
+    )
   ).results.map { it.toDataModel() }
 }

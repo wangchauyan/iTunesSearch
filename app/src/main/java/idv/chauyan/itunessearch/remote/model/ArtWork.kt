@@ -21,7 +21,7 @@ data class ArtWork(
   val artWorkThumbnailLarge: String,
 
   @Json(name = "previewUrl")
-  val artWorkTrial: String,
+  val artWorkTrial: String?,
   val country: String,
   val primaryGenreName: String,
   val isStreamable: Boolean?
