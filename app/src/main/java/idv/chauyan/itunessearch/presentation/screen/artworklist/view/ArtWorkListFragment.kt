@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,6 +20,7 @@ import idv.chauyan.itunessearch.presentation.screen.artworklist.model.ArtWorkLis
 import idv.chauyan.itunessearch.presentation.screen.artworklist.presenter.ArtWorkListPresenter
 import idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater.ArtWorkListAdapter
 import idv.chauyan.itunessearch.presentation.utils.ConditionChecker
+import idv.chauyan.itunessearch.presentation.utils.Configuration
 import idv.chauyan.itunessearch.presentation.utils.ErrorHandler
 
 class ArtWorkListFragment :
@@ -28,10 +30,6 @@ class ArtWorkListFragment :
 
   // customize the recyclerview layout
   private var columnCount = 1
-  private var refreshing = false
-  private var loadMore = false
-  private val pageSize = 10
-  private var since = 0
 
   private lateinit var artWorkListAdapter: ArtWorkListAdapter
   private lateinit var presenter: ArtWorkListContract.Presenter
@@ -67,30 +65,6 @@ class ArtWorkListFragment :
         columnCount <= 1 -> LinearLayoutManager(activity)
         else -> GridLayoutManager(activity, columnCount)
       }
-
-      // get the scroll position changed event
-      addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-          super.onScrolled(recyclerView, dx, dy)
-
-          /*
-          val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-          val totalItems = layoutManager.itemCount
-          val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-
-          if (!loadMore && totalItems >= pageSize && totalItems <= lastVisibleItem + 1) {
-            loadMore = true
-
-            Handler().post {
-              artWorkListAdapter.showLoading()
-            }
-            Handler().postDelayed({
-              // retrieve new artworks
-            }, 500)
-          }
-           */
-        }
-      })
     }
 
     // set up artwork refresher
@@ -100,10 +74,7 @@ class ArtWorkListFragment :
         artWorkRefresher.isRefreshing = false
       }
     }
-
-
     artWorkNetworkView = view.findViewById(R.id.network_condition)
-
     return view
   }
 
@@ -134,14 +105,12 @@ class ArtWorkListFragment :
   }
 
   override fun updateArtWorkList(artWorks: List<PresentationArtWork>) {
-    if (loadMore) {
-      loadMore = false
-      artWorkListAdapter.dismissLoading()
-    }
     artWorkListAdapter.updateArtworks(artWorks, false)
   }
 
   override fun onSelectedArtWork(artWork: PresentationArtWork) {
-    findNavController().navigate(R.id.action_ArtworkListFragment_to_ArtWorkDetailFragment)
+    val direction = ArtWorkListFragmentDirections
+      .actionArtworkListFragmentToArtWorkDetailFragment(artWork)
+    findNavController().navigate(direction)
   }
 }

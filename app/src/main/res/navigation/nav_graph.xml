@@ -22,7 +22,13 @@
     android:id="@+id/ArtWorkDetailFragment"
     android:name="idv.chauyan.itunessearch.presentation.screen.artworkdetail.view.ArtWorkDetailFragment"
     android:label="fragment_art_work_detail"
-    tools:layout="@layout/fragment_art_work_detail" />
+    tools:layout="@layout/fragment_art_work_detail" >
+    <argument
+      android:name="ArtWorkDetail"
+      app:argType="idv.chauyan.itunessearch.presentation.model.PresentationArtWork"
+      app:nullable="true"
+      android:defaultValue="@null" />
+  </fragment>
   <fragment
     android:id="@+id/ArtWorkSplashFragment"
     android:name="idv.chauyan.itunessearch.presentation.screen.artworksplash.view.ArtWorkSplashFragment"

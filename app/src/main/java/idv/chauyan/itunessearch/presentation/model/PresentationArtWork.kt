@@ -1,5 +1,9 @@
 package idv.chauyan.itunessearch.presentation.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class PresentationArtWork(
   val wrapperType: String = "",
   val collectionType: String = "",
@@ -19,4 +23,4 @@ data class PresentationArtWork(
   val primaryGenreName: String = "",
   val artWorkThumbnailSmall: String = "",
   val artWorkThumbnailLarge: String = ""
-)
+) : Parcelable
