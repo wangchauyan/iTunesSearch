@@ -18,7 +18,7 @@ interface SearchAPI {
   ): ArtWorks
 
   companion object {
-    private const val localServer = "https://127.0.0.1"
+    private const val localServer = "http://127.0.0.1:8000/"
     private const val remoteServer = "https://itunes.apple.com/"
     fun create(debug: Boolean): SearchAPI {
       val moshi = Moshi.Builder()
