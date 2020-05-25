@@ -25,7 +25,7 @@ import idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater.Art
 import idv.chauyan.itunessearch.presentation.utils.ConditionChecker
 import idv.chauyan.itunessearch.presentation.utils.ErrorHandler
 
-class ArtWorkListFragment :
+open class ArtWorkListFragment :
   Fragment(),
   ArtWorkListContract.View,
   ArtWorkListContract.View.ArtWorkListBehavior {

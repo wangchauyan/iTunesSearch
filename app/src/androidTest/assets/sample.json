@@ -1,0 +1,27 @@
+{
+  "resultCount": 1,
+  "results": [
+  {
+    "wrapperType": "collection",
+    "collectionType": "Album",
+    "artistId": 159260351,
+    "collectionId": 1468058165,
+    "amgArtistId": 816977,
+    "artistName": "Taylor Swift",
+    "collectionName": "Lover",
+    "collectionCensoredName": "Lover",
+    "artistViewUrl": "https://music.apple.com/us/artist/taylor-swift/159260351?uo=4",
+    "collectionViewUrl": "https://music.apple.com/us/album/lover/1468058165?uo=4",
+    "artworkUrl60": "https://is5-ssl.mzstatic.com/image/thumb/Music123/v4/80/68/41/806841e5-b223-ec85-0c3d-004d1e48e7b0/source/60x60bb.jpg",
+    "artworkUrl100": "https://is5-ssl.mzstatic.com/image/thumb/Music123/v4/80/68/41/806841e5-b223-ec85-0c3d-004d1e48e7b0/source/100x100bb.jpg",
+    "collectionPrice": 11.99,
+    "collectionExplicitness": "notExplicit",
+    "trackCount": 18,
+    "copyright": "℗ 2019 Taylor Swift",
+    "country": "USA",
+    "currency": "USD",
+    "releaseDate": "2019-08-23T07:00:00Z",
+    "primaryGenreName": "Pop"
+  }
+  ]
+}

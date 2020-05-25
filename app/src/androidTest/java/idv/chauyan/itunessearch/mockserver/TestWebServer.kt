@@ -28,13 +28,12 @@ class TestWebServer {
   class APIDispatcher : Dispatcher() {
 
     override fun dispatch(request: RecordedRequest): MockResponse {
-      when (request.path) {
-        "search?" -> {
-          return MockResponse().setResponseCode(200).setBody(Config.getArtworks())
-        }
+      val searchPath = request.path?.contains("/search?&term=swift&entity=album")
+      if (searchPath == true) {
+        return MockResponse().setResponseCode(200).setBody(Config.getArtworks())
       }
+
       return MockResponse().setResponseCode(404)
     }
-
   }
 }
