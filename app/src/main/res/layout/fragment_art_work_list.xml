@@ -60,5 +60,17 @@
       android:text="@string/artwork_no_network"
       android:textSize="16sp"
       android:textStyle="bold" />
+    <TextView
+      android:id="@+id/no_network_retry"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/no_network_text"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="10dp"
+      android:text="@string/artwork_no_network_retry"
+      android:textColor="@color/design_default_color_secondary_variant"
+      android:textSize="16sp"
+      android:textStyle="bold" />
+
   </RelativeLayout>
 </FrameLayout>

@@ -23,6 +23,10 @@ class ArtWorkListPresenter(
     model.cacheSearchResult(keyword, artWorks)
   }
 
+  override fun getCachedResultByKey(keyword: String): List<PresentationArtWork> {
+    return model.getCachedResultByKey(keyword)
+  }
+
   override fun cleanCache() {
     model.cleanCache()
   }

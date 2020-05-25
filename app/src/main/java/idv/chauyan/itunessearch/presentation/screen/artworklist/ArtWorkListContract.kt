@@ -13,6 +13,8 @@ interface ArtWorkListContract {
       artWorks: List<PresentationArtWork>
     )
 
+    fun getCachedResultByKey(keyword: String): List<PresentationArtWork>
+
     fun cleanCache()
   }
 
@@ -22,6 +24,8 @@ interface ArtWorkListContract {
       keyword: String,
       artWorks: List<PresentationArtWork>
     )
+
+    fun getCachedResultByKey(keyword: String): List<PresentationArtWork>
 
     fun cleanCache()
   }

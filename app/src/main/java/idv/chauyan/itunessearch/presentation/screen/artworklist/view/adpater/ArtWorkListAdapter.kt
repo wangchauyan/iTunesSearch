@@ -20,8 +20,7 @@ class ArtWorkListAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
   enum class ItemType {
-    TYPE_DISPLAY_ARTWORK,
-    TYPE_LOADING
+    TYPE_DISPLAY_ARTWORK
   }
 
   private val itemOnClickListener: View.OnClickListener
@@ -52,6 +51,8 @@ class ArtWorkListAdapter(
 
   override fun getItemCount(): Int = artWorks.size
 
+  override fun getItemViewType(position: Int): Int = ItemType.TYPE_DISPLAY_ARTWORK.ordinal
+
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     if (holder is ArtWorkItem) {
       val item = artWorks[position]
@@ -71,10 +72,8 @@ class ArtWorkListAdapter(
   }
 
   fun updateArtworks(
-    data: List<PresentationArtWork>,
-    refreshing: Boolean
+    data: List<PresentationArtWork>
   ) {
-    if (refreshing) artWorks.clear()
     artWorks.addAll(data)
     notifyDataSetChanged()
   }

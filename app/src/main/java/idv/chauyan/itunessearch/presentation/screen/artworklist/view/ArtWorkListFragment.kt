@@ -39,6 +39,7 @@ class ArtWorkListFragment :
   private lateinit var artWorkRefresher: SwipeRefreshLayout
   private lateinit var artWorkSearch: EditText
   private lateinit var artWorkSearchButton: Button
+  private lateinit var artWorkRetrySearch: View
   private lateinit var artWorkContainer: ViewGroup
   private lateinit var artWorkNetworkView: ViewGroup
 
@@ -58,6 +59,14 @@ class ArtWorkListFragment :
     return initViews(inflater, container)
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    // retreive the search result when navigating back
+    keyword?.let {
+      updateArtWorkList(this.presenter.getCachedResultByKey(it))
+    }
+  }
+
   override fun onDestroy() {
     super.onDestroy()
     presenter.cleanCache()
@@ -72,7 +81,7 @@ class ArtWorkListFragment :
 
   override fun updateArtWorkList(artWorks: List<PresentationArtWork>) {
     keyword?.let { this.presenter.cacheSearchResult(it, artWorks) }
-    artWorkListAdapter.updateArtworks(artWorks, false)
+    artWorkListAdapter.updateArtworks(artWorks)
   }
 
   override fun onSelectedArtWork(artWork: PresentationArtWork) {
@@ -139,6 +148,11 @@ class ArtWorkListFragment :
       }
     }
 
+    // set up retry search 
+    artWorkRetrySearch = view.findViewById(R.id.no_network_retry)
+    artWorkRetrySearch.setOnClickListener {
+      this.keyword?.let { searchArtWork(it) }
+    }
 
     artWorkContainer = view.findViewById(R.id.artwork_container)
     artWorkNetworkView = view.findViewById(R.id.network_condition)

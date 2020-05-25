@@ -23,6 +23,10 @@ class ArtWorkListModel(
     searchCache.put(keyword, artWorks)
   }
 
+  override fun getCachedResultByKey(keyword: String): List<PresentationArtWork> {
+    return searchCache.get(keyword)
+  }
+
   override fun cleanCache() {
     searchCache.evictAll()
   }
