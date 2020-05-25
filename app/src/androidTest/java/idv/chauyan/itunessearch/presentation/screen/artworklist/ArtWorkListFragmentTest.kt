@@ -36,11 +36,6 @@ class ArtWorkListFragmentTest {
   }
 
   @Test
-  fun shouldShowNoNetworkView() {
-
-  }
-
-  @Test
   fun shouldShowArtWorkListView() {
 
     var artWorkListView: RecyclerView? = null
