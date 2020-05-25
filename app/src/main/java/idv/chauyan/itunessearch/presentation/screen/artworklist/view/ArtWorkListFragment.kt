@@ -1,10 +1,13 @@
 package idv.chauyan.itunessearch.presentation.screen.artworklist.view
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,7 +23,6 @@ import idv.chauyan.itunessearch.presentation.screen.artworklist.model.ArtWorkLis
 import idv.chauyan.itunessearch.presentation.screen.artworklist.presenter.ArtWorkListPresenter
 import idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater.ArtWorkListAdapter
 import idv.chauyan.itunessearch.presentation.utils.ConditionChecker
-import idv.chauyan.itunessearch.presentation.utils.Configuration
 import idv.chauyan.itunessearch.presentation.utils.ErrorHandler
 
 class ArtWorkListFragment :
@@ -35,7 +37,12 @@ class ArtWorkListFragment :
   private lateinit var presenter: ArtWorkListContract.Presenter
   private lateinit var artWorkList: RecyclerView
   private lateinit var artWorkRefresher: SwipeRefreshLayout
+  private lateinit var artWorkSearch: EditText
+  private lateinit var artWorkSearchButton: Button
+  private lateinit var artWorkContainer: ViewGroup
   private lateinit var artWorkNetworkView: ViewGroup
+
+  private var keyword: String? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -48,12 +55,47 @@ class ArtWorkListFragment :
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
+    return initViews(inflater, container)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    presenter.cleanCache()
+  }
+
+  /**
+   * Artwork list view contract
+   */
+  override fun setPresenter(presenter: ArtWorkListContract.Presenter) {
+    this.presenter = presenter
+  }
+
+  override fun updateArtWorkList(artWorks: List<PresentationArtWork>) {
+    keyword?.let { this.presenter.cacheSearchResult(it, artWorks) }
+    artWorkListAdapter.updateArtworks(artWorks, false)
+  }
+
+  override fun onSelectedArtWork(artWork: PresentationArtWork) {
+    val direction = ArtWorkListFragmentDirections
+      .actionArtworkListFragmentToArtWorkDetailFragment(artWork)
+    findNavController().navigate(direction)
+  }
+
+  /**
+   * private functions
+   */
+  private fun initViews(
+    inflater: LayoutInflater,
+    container: ViewGroup?
+  ): View {
+
     val view = inflater.inflate(
       R.layout.fragment_art_work_list,
       container,
       false
     )
 
+    // set up artwork recyclerview
     artWorkList = view.findViewById(R.id.list)
     artWorkList.apply {
       // init artwork list adapter
@@ -74,20 +116,45 @@ class ArtWorkListFragment :
         artWorkRefresher.isRefreshing = false
       }
     }
+
+    // set up artwork search
+    artWorkSearch = view.findViewById(R.id.artwork_search)
+    artWorkSearch.addTextChangedListener(object : TextWatcher {
+      override fun afterTextChanged(s: Editable?) {
+      }
+
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+      }
+
+      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+      }
+    })
+
+    // set up artwork search button
+    artWorkSearchButton = view.findViewById(R.id.artwork_search_btn)
+    artWorkSearchButton.apply {
+      setOnClickListener {
+        keyword = artWorkSearch.text.toString()
+        keyword?.let { searchArtWork(it) }
+      }
+    }
+
+
+    artWorkContainer = view.findViewById(R.id.artwork_container)
     artWorkNetworkView = view.findViewById(R.id.network_condition)
+
     return view
   }
 
-  override fun onResume() {
-    super.onResume()
+  private fun searchArtWork(keyword: String) {
     context?.let {
       if (ConditionChecker.isNetworkAvailable(it)) {
-        artWorkRefresher.visibility = View.VISIBLE
+        artWorkContainer.visibility = View.VISIBLE
         artWorkNetworkView.visibility = View.GONE
 
-        this.presenter.getArtWorks()
+        this.presenter.getArtWorks(keyword)
       } else {
-        artWorkRefresher.visibility = View.GONE
+        artWorkContainer.visibility = View.GONE
         artWorkNetworkView.visibility = View.VISIBLE
         ErrorHandler.showErrorMessage(it, ErrorHandler.ErrorType.NetworkConnectError(
           ErrorHandler.ErrorCode.NetworkError,
@@ -95,22 +162,5 @@ class ArtWorkListFragment :
         ))
       }
     }
-  }
-
-  /**
-   * Artwork list view contract
-   */
-  override fun setPresenter(presenter: ArtWorkListContract.Presenter) {
-    this.presenter = presenter
-  }
-
-  override fun updateArtWorkList(artWorks: List<PresentationArtWork>) {
-    artWorkListAdapter.updateArtworks(artWorks, false)
-  }
-
-  override fun onSelectedArtWork(artWork: PresentationArtWork) {
-    val direction = ArtWorkListFragmentDirections
-      .actionArtworkListFragmentToArtWorkDetailFragment(artWork)
-    findNavController().navigate(direction)
   }
 }

@@ -7,6 +7,6 @@
 
   <!-- Strings used for fragments -->
   <string name="artwork_no_network">No network connection!</string>
-  <string name="dummy_button">Dummy Button</string>
-  <string name="dummy_content">DUMMY\nCONTENT</string>
+  <string name="artwork_search_btn">Search</string>
+  <string name="artwork_search_hint">Give me some key words !</string>
 </resources>

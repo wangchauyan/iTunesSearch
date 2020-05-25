@@ -4,19 +4,40 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/refresher"
+  <LinearLayout
+    android:id="@+id/artwork_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/list"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_margin="5dp"
-      app:layoutManager="LinearLayoutManager"
-      tools:context=".presentation.screen.restaurant_list.view.RestaurantListFragment"
-      tools:listitem="@layout/fragment_art_work_item" />
-  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+      android:layout_height="wrap_content">
+      <EditText
+        android:id="@+id/artwork_search"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:hint="@string/artwork_search_hint" />
+      <Button
+        android:id="@+id/artwork_search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/artwork_search_btn" />
+    </LinearLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+      android:id="@+id/refresher"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".presentation.screen.restaurant_list.view.RestaurantListFragment"
+        tools:listitem="@layout/fragment_art_work_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+  </LinearLayout>
   <RelativeLayout
     android:id="@+id/network_condition"
     android:layout_width="match_parent"
@@ -40,5 +61,4 @@
       android:textSize="16sp"
       android:textStyle="bold" />
   </RelativeLayout>
-
 </FrameLayout>

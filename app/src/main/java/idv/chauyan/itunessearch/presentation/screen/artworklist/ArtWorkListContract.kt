@@ -8,10 +8,22 @@ interface ArtWorkListContract {
 
   interface Model {
     suspend fun getArtWorks(): List<PresentationArtWork>
+    fun cacheSearchResult(
+      keyword: String,
+      artWorks: List<PresentationArtWork>
+    )
+
+    fun cleanCache()
   }
 
   interface Presenter : BasePresenter {
-    fun getArtWorks()
+    fun getArtWorks(keyword: String)
+    fun cacheSearchResult(
+      keyword: String,
+      artWorks: List<PresentationArtWork>
+    )
+
+    fun cleanCache()
   }
 
   interface View : BaseView<Presenter> {
