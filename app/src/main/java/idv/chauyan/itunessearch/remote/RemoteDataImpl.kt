@@ -8,9 +8,9 @@ class RemoteDataImpl(
   private val api: SearchAPI
 ) : RemoteData {
 
-  override suspend fun getArtWorks() = api.getArtWorks(
+  override suspend fun getArtWorks(keyword: String) = api.getArtWorks(
     mapOf(
-      "term" to "Swift",
+      "term" to keyword,
       "entity" to "album"
     )
   ).results.map { it.toDataModel() }

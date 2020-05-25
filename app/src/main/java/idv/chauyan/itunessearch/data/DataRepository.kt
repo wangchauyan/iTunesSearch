@@ -9,6 +9,6 @@ class DataRepository(
   private val dataSource: DataSource
 ) : DomainRepository {
 
-  override suspend fun getArtWorks() =
-    (dataSource as RemoteData).getArtWorks().map { it.toDomainModel() }
+  override suspend fun getArtWorks(keyword: String) =
+    (dataSource as RemoteData).getArtWorks(keyword).map { it.toDomainModel() }
 }

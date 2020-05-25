@@ -7,7 +7,7 @@ import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 interface ArtWorkListContract {
 
   interface Model {
-    suspend fun getArtWorks(): List<PresentationArtWork>
+    suspend fun getArtWorks(keyword: String): List<PresentationArtWork>
     fun cacheSearchResult(
       keyword: String,
       artWorks: List<PresentationArtWork>

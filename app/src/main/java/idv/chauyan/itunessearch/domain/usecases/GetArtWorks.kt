@@ -6,5 +6,5 @@ class GetArtWorks(
   private val domainRepository: DomainRepository
 ) {
 
-  suspend fun get() = domainRepository.getArtWorks()
+  suspend fun get(keyword: String) = domainRepository.getArtWorks(keyword)
 }
