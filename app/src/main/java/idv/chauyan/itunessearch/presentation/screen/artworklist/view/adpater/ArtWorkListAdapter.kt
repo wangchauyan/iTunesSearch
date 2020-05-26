@@ -108,7 +108,7 @@ class ArtWorkListAdapter(
     val container: ViewGroup = view.container
     val artWorkLogo: ImageView = view.artWorkImage
     val artistName: TextView = view.artistName
-    val trackName: TextView = view.trackName
+    val trackName: TextView = view.collectionName
   }
 
   inner class ArtWorkLoading(val view: View) : RecyclerView.ViewHolder(view) {
