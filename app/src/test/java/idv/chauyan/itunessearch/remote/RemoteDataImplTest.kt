@@ -23,17 +23,42 @@ class RemoteDataImplTest {
 
   @ExperimentalCoroutinesApi
   @Test
-  fun getArtWorks() {
+  fun getAlbumsByKeyword() {
     runBlockingTest {
       val remoteArtWorks = ArtWorks(
         resultCount = 0,
         results = listOf()
       )
       val keyword = "swift"
-      val params = mapOf("term" to keyword)
+      val params = mapOf(
+        "term" to keyword,
+        "entity" to "album"
+      )
 
       `when`(searchAPI.getArtWorks(params)).thenReturn(remoteArtWorks)
-      remoteDataImpl.getArtWorks(keyword)
+      remoteDataImpl.getAlbumsByKeyword(keyword)
+      verify(searchAPI).getArtWorks(params)
+    }
+  }
+
+  @ExperimentalCoroutinesApi
+  @Test
+  fun getTracksByAlbumTitle() {
+    runBlockingTest {
+      val remoteArtWorks = ArtWorks(
+        resultCount = 0,
+        results = listOf()
+      )
+      val albumTitle = "red"
+      val params = mapOf(
+        "term" to albumTitle,
+        "entity" to "song",
+        "attribute" to "albumTerm",
+        "limit" to "10000"
+      )
+
+      `when`(searchAPI.getArtWorks(params)).thenReturn(remoteArtWorks)
+      remoteDataImpl.getTracksByAlbumTitle(albumTitle)
       verify(searchAPI).getArtWorks(params)
     }
   }

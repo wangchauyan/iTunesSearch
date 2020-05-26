@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import idv.chauyan.itunessearch.R
 import idv.chauyan.itunessearch.domain.DomainRepository
-import idv.chauyan.itunessearch.domain.usecases.GetArtWorks
+import idv.chauyan.itunessearch.domain.usecases.GetAlbumsByKeyword
 import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 import idv.chauyan.itunessearch.presentation.screen.artworklist.ArtWorkListContract
 import idv.chauyan.itunessearch.presentation.screen.artworklist.model.ArtWorkListModel
@@ -47,7 +47,7 @@ open class ArtWorkListFragment :
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val model = ArtWorkListModel(GetArtWorks(DomainRepository.create(false)))
+    val model = ArtWorkListModel(GetAlbumsByKeyword(DomainRepository.create(false)))
     setPresenter(ArtWorkListPresenter(model, this))
   }
 

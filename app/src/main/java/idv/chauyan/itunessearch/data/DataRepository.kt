@@ -9,6 +9,9 @@ class DataRepository(
   private val dataSource: DataSource
 ) : DomainRepository {
 
-  override suspend fun getArtWorks(keyword: String) =
-    (dataSource as RemoteData).getArtWorks(keyword).map { it.toDomainModel() }
+  override suspend fun getAlbumsByKeyword(keyword: String) =
+    (dataSource as RemoteData).getAlbumsByKeyword(keyword).map { it.toDomainModel() }
+
+  override suspend fun getTracksByAlbumTitle(albumTitle: String) =
+    (dataSource as RemoteData).getTracksByAlbumTitle(albumTitle).map { it.toDomainModel() }
 }

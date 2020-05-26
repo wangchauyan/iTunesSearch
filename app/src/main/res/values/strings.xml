@@ -8,6 +8,6 @@
   <!-- Strings used for fragments -->
   <string name="artwork_no_network">No network connection!</string>
   <string name="artwork_no_network_retry">Retry ?</string>
-  <string name="artwork_search_btn">Search</string>
+  <string name="artwork_search_btn">Album Search</string>
   <string name="artwork_search_hint">Give me some key words !</string>
 </resources>

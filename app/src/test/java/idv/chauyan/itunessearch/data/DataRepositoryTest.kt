@@ -23,15 +23,28 @@ class DataRepositoryTest {
 
   @ExperimentalCoroutinesApi
   @Test
-  fun getArtWorks() {
+  fun getAlbumsByKeyword() {
     runBlockingTest {
 
       val dataArtWorks = listOf<DataArtWork>()
       val keyword = "swift"
 
-      `when`(remoteData.getArtWorks(keyword)).thenReturn(dataArtWorks)
-      dataRepository.getArtWorks(keyword)
-      verify(remoteData).getArtWorks(keyword)
+      `when`(remoteData.getAlbumsByKeyword(keyword)).thenReturn(dataArtWorks)
+      dataRepository.getAlbumsByKeyword(keyword)
+      verify(remoteData).getAlbumsByKeyword(keyword)
+    }
+  }
+
+  @Test
+  fun getTracksByAlbumTitle() {
+    runBlockingTest {
+
+      val dataArtWorks = listOf<DataArtWork>()
+      val albumTitle = "red"
+
+      `when`(remoteData.getTracksByAlbumTitle(albumTitle)).thenReturn(dataArtWorks)
+      dataRepository.getTracksByAlbumTitle(albumTitle)
+      verify(remoteData).getTracksByAlbumTitle(albumTitle)
     }
   }
 }

@@ -13,13 +13,13 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetArtWorksTest {
+class GetAlbumsByKeywordTest {
 
   @Mock
   private lateinit var domainRepository: DomainRepository
 
   @InjectMocks
-  private lateinit var getArtWorks: GetArtWorks
+  private lateinit var getAlbumsByKeyword: GetAlbumsByKeyword
 
   @ExperimentalCoroutinesApi
   @Test
@@ -29,9 +29,9 @@ class GetArtWorksTest {
       val domainArtWorks = listOf<DomainArtWork>()
       val keyword = "swift"
 
-      `when`(domainRepository.getArtWorks(keyword)).thenReturn(domainArtWorks)
-      getArtWorks.get(keyword)
-      verify(domainRepository).getArtWorks(keyword)
+      `when`(domainRepository.getAlbumsByKeyword(keyword)).thenReturn(domainArtWorks)
+      getAlbumsByKeyword.get(keyword)
+      verify(domainRepository).getAlbumsByKeyword(keyword)
     }
   }
 }

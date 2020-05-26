@@ -6,7 +6,8 @@ import idv.chauyan.itunessearch.domain.model.DomainArtWork
 
 interface DomainRepository {
 
-  suspend fun getArtWorks(keyword: String): List<DomainArtWork>
+  suspend fun getAlbumsByKeyword(keyword: String): List<DomainArtWork>
+  suspend fun getTracksByAlbumTitle(albumTitle: String): List<DomainArtWork>
 
   companion object {
     fun create(debug: Boolean): DomainRepository {

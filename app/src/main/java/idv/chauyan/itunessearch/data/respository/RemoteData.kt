@@ -5,7 +5,8 @@ import idv.chauyan.itunessearch.remote.RemoteDataImpl
 import idv.chauyan.itunessearch.remote.api.SearchAPI
 
 interface RemoteData : DataSource {
-  suspend fun getArtWorks(keyword: String): List<DataArtWork>
+  suspend fun getAlbumsByKeyword(keyword: String): List<DataArtWork>
+  suspend fun getTracksByAlbumTitle(albumTitle: String): List<DataArtWork>
 
   companion object {
     fun createRemoteDataSource(debug: Boolean): RemoteData {
