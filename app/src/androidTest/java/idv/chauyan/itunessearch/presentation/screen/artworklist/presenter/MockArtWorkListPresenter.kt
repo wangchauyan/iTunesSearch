@@ -9,10 +9,10 @@ class MockArtWorkListPresenter(
   private val view: ArtWorkListContract.View
 ) : ArtWorkListContract.Presenter {
 
-  override fun getArtWorks(keyword: String) {
+  override fun getAlbumsByKeyword(keyword: String) {
     runBlocking {
-      val data = model.getArtWorks(keyword)
-      view.updateArtWorkList(data)
+      val data = model.getAlbumsByKeyword(keyword)
+      view.updateAlbumList(data)
     }
   }
 

@@ -9,10 +9,10 @@ class ArtWorkListPresenter(
   private val view: ArtWorkListContract.View
 ) : ArtWorkListContract.Presenter {
 
-  override fun getArtWorks(keyword: String) {
+  override fun getAlbumsByKeyword(keyword: String) {
     runBlocking {
-      val artWorks = model.getArtWorks(keyword)
-      view.updateArtWorkList(artWorks)
+      val artWorks = model.getAlbumsByKeyword(keyword)
+      view.updateAlbumList(artWorks)
     }
   }
 

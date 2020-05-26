@@ -13,7 +13,7 @@ class ArtWorkListModel(
   private val cacheSize = 4 * 1024 * 1024
   private val searchCache = LruCache<String, List<PresentationArtWork>>(cacheSize)
 
-  override suspend fun getArtWorks(keyword: String): List<PresentationArtWork> =
+  override suspend fun getAlbumsByKeyword(keyword: String): List<PresentationArtWork> =
     getAlbumsByKeyword.get(keyword).map { it.toPresentationModel() }
 
   override fun cacheSearchResult(

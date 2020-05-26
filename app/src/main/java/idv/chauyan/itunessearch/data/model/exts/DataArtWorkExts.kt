@@ -5,42 +5,42 @@ import idv.chauyan.itunessearch.remote.model.ArtWork
 
 fun DataArtWork.toRemoteModel(): ArtWork = ArtWork(
   wrapperType,
-  collectionType,
   artistId,
   collectionId,
-  amgArtistId,
   artistName,
   collectionName,
   artistViewUrl,
   collectionViewUrl,
   collectionPrice,
   trackCount,
-  copyright,
   country,
   currency,
   releaseDate,
   primaryGenreName,
+  trackName,
+  trackNumber,
+  trackPrice,
   artWorkThumbnailSmall,
   artWorkThumbnailLarge
 )
 
 fun ArtWork.toDataModel(): DataArtWork = DataArtWork(
   wrapperType,
-  collectionType,
   artistId,
   collectionId,
-  amgArtistId,
   artistName,
   collectionName,
   artistViewUrl,
   collectionViewUrl,
   collectionPrice,
   trackCount,
-  copyright,
   country,
   currency,
   releaseDate,
   primaryGenreName,
+  trackName,
+  trackNumber,
+  trackPrice,
   artWorkThumbnailSmall,
   artWorkThumbnailLarge
 )

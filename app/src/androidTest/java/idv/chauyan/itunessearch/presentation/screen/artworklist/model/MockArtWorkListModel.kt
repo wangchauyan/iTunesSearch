@@ -9,7 +9,7 @@ class MockArtWorkListModel(
   private val getAlbumsByKeyword: GetAlbumsByKeyword
 ) : ArtWorkListContract.Model {
 
-  override suspend fun getArtWorks(keyword: String): List<PresentationArtWork> {
+  override suspend fun getAlbumsByKeyword(keyword: String): List<PresentationArtWork> {
     return getAlbumsByKeyword.get(keyword).map { it.toPresentationModel() }
   }
 

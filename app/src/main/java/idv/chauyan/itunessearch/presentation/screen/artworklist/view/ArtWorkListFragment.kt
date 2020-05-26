@@ -61,9 +61,9 @@ open class ArtWorkListFragment :
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    // retreive the search result when navigating back
+    // retrieve the search result when navigating back
     keyword?.let {
-      updateArtWorkList(this.presenter.getCachedResultByKey(it))
+      updateAlbumList(this.presenter.getCachedResultByKey(it))
     }
   }
 
@@ -79,12 +79,12 @@ open class ArtWorkListFragment :
     this.presenter = presenter
   }
 
-  override fun updateArtWorkList(artWorks: List<PresentationArtWork>) {
+  override fun updateAlbumList(artWorks: List<PresentationArtWork>) {
     keyword?.let { this.presenter.cacheSearchResult(it, artWorks) }
     artWorkListAdapter.updateArtworks(artWorks)
   }
 
-  override fun onSelectedArtWork(artWork: PresentationArtWork) {
+  override fun onSelectedAlbum(artWork: PresentationArtWork) {
     val direction = ArtWorkListFragmentDirections
       .actionArtworkListFragmentToArtWorkDetailFragment(artWork)
     findNavController().navigate(direction)
@@ -166,7 +166,7 @@ open class ArtWorkListFragment :
         artWorkContainer.visibility = View.VISIBLE
         artWorkNetworkView.visibility = View.GONE
 
-        this.presenter.getArtWorks(keyword)
+        this.presenter.getAlbumsByKeyword(keyword)
       } else {
         artWorkContainer.visibility = View.GONE
         artWorkNetworkView.visibility = View.VISIBLE

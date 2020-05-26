@@ -16,7 +16,7 @@ object Config {
       .getInstrumentation()
       .context
       .assets
-      .open("sample.json")
+      .open("sample_albums.json")
     return inputStream.bufferedReader().use(BufferedReader::readText)
   }
 }

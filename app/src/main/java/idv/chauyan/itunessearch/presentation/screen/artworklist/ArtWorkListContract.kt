@@ -7,7 +7,7 @@ import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 interface ArtWorkListContract {
 
   interface Model {
-    suspend fun getArtWorks(keyword: String): List<PresentationArtWork>
+    suspend fun getAlbumsByKeyword(keyword: String): List<PresentationArtWork>
     fun cacheSearchResult(
       keyword: String,
       artWorks: List<PresentationArtWork>
@@ -19,7 +19,7 @@ interface ArtWorkListContract {
   }
 
   interface Presenter : BasePresenter {
-    fun getArtWorks(keyword: String)
+    fun getAlbumsByKeyword(keyword: String)
     fun cacheSearchResult(
       keyword: String,
       artWorks: List<PresentationArtWork>
@@ -31,10 +31,10 @@ interface ArtWorkListContract {
   }
 
   interface View : BaseView<Presenter> {
-    fun updateArtWorkList(artworks: List<PresentationArtWork>)
+    fun updateAlbumList(albums: List<PresentationArtWork>)
 
     interface ArtWorkListBehavior {
-      fun onSelectedArtWork(artWork: PresentationArtWork)
+      fun onSelectedAlbum(artWork: PresentationArtWork)
     }
   }
 }

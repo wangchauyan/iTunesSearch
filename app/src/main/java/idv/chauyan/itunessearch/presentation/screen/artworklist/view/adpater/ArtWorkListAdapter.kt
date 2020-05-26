@@ -28,7 +28,7 @@ class ArtWorkListAdapter(
   init {
     itemOnClickListener = View.OnClickListener { v ->
       val item = v.tag as PresentationArtWork
-      listener?.onSelectedArtWork(item)
+      listener?.onSelectedAlbum(item)
     }
   }
 

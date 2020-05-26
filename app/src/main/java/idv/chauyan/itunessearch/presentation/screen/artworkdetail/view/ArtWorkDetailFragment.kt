@@ -9,7 +9,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import idv.chauyan.itunessearch.R
+import idv.chauyan.itunessearch.domain.DomainRepository
+import idv.chauyan.itunessearch.domain.usecases.GetAlbumsByKeyword
+import idv.chauyan.itunessearch.domain.usecases.GetTracksByAlbumTitle
+import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
 import idv.chauyan.itunessearch.presentation.screen.artworkdetail.ArtWorkDetailContract
+import idv.chauyan.itunessearch.presentation.screen.artworkdetail.model.ArtWorkDetailModel
+import idv.chauyan.itunessearch.presentation.screen.artworkdetail.presenter.ArtWorkDetailPresenter
+import idv.chauyan.itunessearch.presentation.screen.artworklist.model.ArtWorkListModel
+import idv.chauyan.itunessearch.presentation.screen.artworklist.presenter.ArtWorkListPresenter
 
 
 class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
@@ -28,6 +36,9 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
     arguments?.let {
       args = ArtWorkDetailFragmentArgs.fromBundle(it)
     }
+
+    val model = ArtWorkDetailModel(GetTracksByAlbumTitle(DomainRepository.create(false)))
+    setPresenter(ArtWorkDetailPresenter(model, this))
   }
 
   override fun onCreateView(
@@ -45,13 +56,24 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
     return view
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    // fill in related information
+    args?.ArtWorkDetail?.let {
+      Picasso.get().load(it.artWorkThumbnailLarge).into(albumImage)
+      albumTitle.text = it.collectionName
+      artistName.text = it.artistName
+      releaseDate.text = it.releaseDate
+      musicType.text = it.primaryGenreName
+    }
+  }
+
   override fun onResume() {
     super.onResume()
-
-    args?.ArtWorkDetail?.artWorkThumbnailLarge?.let {
-      Picasso.get().load(it).into(albumImage)
+    args?.ArtWorkDetail?.let {
+      presenter.getTracksByAlbumTitle(it.collectionName, it.collectionId)
     }
-
   }
 
   /**
@@ -59,5 +81,11 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
    */
   override fun setPresenter(presenter: ArtWorkDetailContract.Presenter) {
     this.presenter = presenter
+  }
+
+  override fun updateTrackList(tracks: List<PresentationArtWork>) {
+    tracks.forEach {
+      println("track name : ".plus(it.trackName))
+    }
   }
 }
