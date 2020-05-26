@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import idv.chauyan.itunessearch.R
 import idv.chauyan.itunessearch.presentation.model.PresentationArtWork
@@ -106,7 +106,7 @@ class ArtWorkListAdapter(
   inner class ArtWorkItem(val view: View) : RecyclerView.ViewHolder(view) {
 
     val container: ViewGroup = view.container
-    val artWorkLogo: ImageView = view.artWorkImage
+    val artWorkLogo: ShapeableImageView = view.artWorkImage
     val artistName: TextView = view.artistName
     val trackName: TextView = view.collectionName
   }
