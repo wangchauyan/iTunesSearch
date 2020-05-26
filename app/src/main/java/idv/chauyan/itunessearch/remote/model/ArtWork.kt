@@ -13,7 +13,7 @@ data class ArtWork(
   val collectionName: String,
   val artistViewUrl: String,
   val collectionViewUrl: String,
-  val collectionPrice: Double,
+  val collectionPrice: Double?,
   val trackCount: Long,
   val country: String,
   val currency: String,

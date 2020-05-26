@@ -74,6 +74,7 @@ class ArtWorkListAdapter(
   fun updateArtworks(
     data: List<PresentationArtWork>
   ) {
+    artWorks.clear()
     artWorks.addAll(data)
     notifyDataSetChanged()
   }

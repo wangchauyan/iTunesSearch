@@ -12,14 +12,14 @@ data class PresentationArtWork(
   val collectionName: String = "",
   val artistViewUrl: String = "",
   val collectionViewUrl: String = "",
-  val collectionPrice: Double = 0.0,
+  val collectionPrice: Double? = 0.0,
   val trackCount: Long = 0,
   val country: String = "",
   val currency: String = "",
   val releaseDate: String = "",
   val primaryGenreName: String = "",
 
-  // track information
+// track information
   val trackName: String? = null,
   val trackNumber: Int? = 0,
   val trackPrice: Double? = 0.0,

@@ -82,6 +82,11 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
     }
   }
 
+  override fun onDestroyView() {
+    super.onDestroyView()
+    presenter.cancelAllJobs()
+  }
+
   /**
    * ArtWorkDetailContract View interfaces
    */

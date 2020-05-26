@@ -14,6 +14,8 @@ interface ArtWorkDetailContract {
       albumTitle: String,
       collectionId: String
     )
+
+    fun cancelAllJobs()
   }
 
   interface View : BaseView<Presenter> {
