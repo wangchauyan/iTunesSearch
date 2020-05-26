@@ -18,6 +18,7 @@ import idv.chauyan.itunessearch.presentation.screen.artworkdetail.model.ArtWorkD
 import idv.chauyan.itunessearch.presentation.screen.artworkdetail.presenter.ArtWorkDetailPresenter
 import idv.chauyan.itunessearch.presentation.screen.artworklist.model.ArtWorkListModel
 import idv.chauyan.itunessearch.presentation.screen.artworklist.presenter.ArtWorkListPresenter
+import java.lang.StringBuilder
 
 
 class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
@@ -28,6 +29,8 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
   private lateinit var artistName: TextView
   private lateinit var releaseDate: TextView
   private lateinit var musicType: TextView
+  private lateinit var albumPrice: TextView
+  private lateinit var albumTracks: TextView
 
   private lateinit var presenter: ArtWorkDetailContract.Presenter
 
@@ -52,6 +55,8 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
     artistName = view.findViewById(R.id.artist_name)
     releaseDate = view.findViewById(R.id.release_date)
     musicType = view.findViewById(R.id.music_type)
+    albumPrice = view.findViewById(R.id.album_price)
+    albumTracks = view.findViewById(R.id.album_tracks)
 
     return view
   }
@@ -62,10 +67,11 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
     // fill in related information
     args?.ArtWorkDetail?.let {
       Picasso.get().load(it.artWorkThumbnailLarge).into(albumImage)
-      albumTitle.text = it.collectionName
-      artistName.text = it.artistName
-      releaseDate.text = it.releaseDate
-      musicType.text = it.primaryGenreName
+      albumTitle.text = getString(R.string.artwork_album_title).plus(it.collectionName)
+      artistName.text = getString(R.string.artwork_artist_name).plus(it.artistName)
+      releaseDate.text = getString(R.string.artwork_release_date).plus(it.releaseDate)
+      musicType.text = getString(R.string.artwork_music_genre).plus(it.primaryGenreName)
+      albumPrice.text = getString(R.string.artwork_album_price).plus(it.collectionPrice)
     }
   }
 
@@ -84,8 +90,10 @@ class ArtWorkDetailFragment : Fragment(), ArtWorkDetailContract.View {
   }
 
   override fun updateTrackList(tracks: List<PresentationArtWork>) {
+    val stringBuilder = StringBuilder()
     tracks.forEach {
-      println("track name : ".plus(it.trackName))
+      stringBuilder.append("\n".plus(it.trackNumber).plus(": ").plus(it.trackName))
     }
+    albumTracks.text = getString(R.string.artwork_album_tracks).plus(stringBuilder.toString())
   }
 }

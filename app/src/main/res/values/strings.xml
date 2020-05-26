@@ -10,4 +10,10 @@
   <string name="artwork_no_network_retry">Retry ?</string>
   <string name="artwork_search_btn">Album Search</string>
   <string name="artwork_search_hint">Give me some key words !</string>
+  <string name="artwork_album_title">Album Title: </string>
+  <string name="artwork_artist_name">Artist Name: </string>
+  <string name="artwork_release_date">Release Date: </string>
+  <string name="artwork_music_genre">Music Genre: </string>
+  <string name="artwork_album_price">Album Price: </string>
+  <string name="artwork_album_tracks">Album Tracks: </string>
 </resources>
