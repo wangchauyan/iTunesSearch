@@ -69,7 +69,8 @@ class ArtWorkListAdapter(
         .load(item.artWorkThumbnailSmall)
         .into(holder.artWorkLogo)
       holder.artistName.text = item.artistName
-      holder.trackName.text = item.collectionName
+      holder.collectionName.text = item.collectionName
+      holder.collectionPrice.text = "$".plus(item.collectionPrice ?: "")
 
       with(holder.view) {
         tag = item
@@ -108,7 +109,8 @@ class ArtWorkListAdapter(
     val container: ViewGroup = view.container
     val artWorkLogo: ShapeableImageView = view.artWorkImage
     val artistName: TextView = view.artistName
-    val trackName: TextView = view.collectionName
+    val collectionName: TextView = view.collectionName
+    val collectionPrice: TextView = view.collectionPrice
   }
 
   inner class ArtWorkLoading(val view: View) : RecyclerView.ViewHolder(view) {
