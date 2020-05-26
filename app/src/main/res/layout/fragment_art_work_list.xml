@@ -3,7 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:background="@color/artwork_list_bg_color">
   <LinearLayout
     android:id="@+id/artwork_container"
     android:layout_width="match_parent"
@@ -15,14 +16,16 @@
       <EditText
         android:id="@+id/artwork_search"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="4"
         android:background="@drawable/search_box_bg"
         android:drawableStart="@drawable/ic_search_gray_24dp"
         android:drawablePadding="8dp"
+        android:elevation="10dp"
         android:ems="10"
         android:hint="@string/artwork_search_hint"
         android:inputType="textPersonName"
@@ -31,6 +34,7 @@
         android:id="@+id/artwork_search_btn"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
         android:text="@string/artwork_search_btn"
         android:textStyle="bold" />
