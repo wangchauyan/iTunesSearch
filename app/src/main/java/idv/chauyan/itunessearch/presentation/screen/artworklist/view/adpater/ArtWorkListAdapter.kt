@@ -1,8 +1,10 @@
 package idv.chauyan.itunessearch.presentation.screen.artworklist.view.adpater
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -15,7 +17,8 @@ import kotlinx.android.synthetic.main.fragment_art_work_item.view.*
 import kotlinx.android.synthetic.main.fragment_art_work_loadmore.view.*
 
 class ArtWorkListAdapter(
-  private var artWorks: ArrayList<PresentationArtWork>,
+  private val context: Context,
+  private val artWorks: ArrayList<PresentationArtWork>,
   private val listener: ArtWorkListContract.View.ArtWorkListBehavior?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -55,6 +58,12 @@ class ArtWorkListAdapter(
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     if (holder is ArtWorkItem) {
+
+      holder.container.animation = AnimationUtils.loadAnimation(
+        context,
+        R.anim.fade_scale_animation
+      )
+
       val item = artWorks[position]
       Picasso.get()
         .load(item.artWorkThumbnailSmall)
@@ -96,6 +105,7 @@ class ArtWorkListAdapter(
    */
   inner class ArtWorkItem(val view: View) : RecyclerView.ViewHolder(view) {
 
+    val container: ViewGroup = view.container
     val artWorkLogo: ImageView = view.artWorkImage
     val artistName: TextView = view.artistName
     val trackName: TextView = view.trackName

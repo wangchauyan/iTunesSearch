@@ -108,7 +108,11 @@ open class ArtWorkListFragment :
     artWorkList = view.findViewById(R.id.list)
     artWorkList.apply {
       // init artwork list adapter
-      artWorkListAdapter = ArtWorkListAdapter(arrayListOf(), this@ArtWorkListFragment)
+      artWorkListAdapter = ArtWorkListAdapter(
+        context,
+        arrayListOf(),
+        this@ArtWorkListFragment
+      )
 
       // properties initialization
       adapter = artWorkListAdapter
