@@ -2,8 +2,7 @@ package idv.chauyan.itunessearch.remote.api
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import idv.chauyan.itunessearch.remote.model.ArtWork
-import idv.chauyan.itunessearch.remote.model.ArtWorks
+import idv.chauyan.itunessearch.remote.model.Albums
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -13,9 +12,9 @@ interface SearchAPI {
 
   @GET("search?")
   @JvmSuppressWildcards
-  suspend fun getArtWorks(
+  suspend fun getAlbums(
     @QueryMap params: Map<String, String>
-  ): ArtWorks
+  ): Albums
 
   companion object {
     private const val localServer = "http://127.0.0.1:8000/"

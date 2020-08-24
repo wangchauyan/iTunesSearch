@@ -1,7 +1,7 @@
 package idv.chauyan.itunessearch.remote
 
 import idv.chauyan.itunessearch.remote.api.SearchAPI
-import idv.chauyan.itunessearch.remote.model.ArtWorks
+import idv.chauyan.itunessearch.remote.model.Albums
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -25,7 +25,7 @@ class RemoteDataImplTest {
   @Test
   fun getAlbumsByKeyword() {
     runBlockingTest {
-      val remoteArtWorks = ArtWorks(
+      val remoteArtWorks = Albums(
         resultCount = 0,
         results = listOf()
       )
@@ -35,9 +35,9 @@ class RemoteDataImplTest {
         "entity" to "album"
       )
 
-      `when`(searchAPI.getArtWorks(params)).thenReturn(remoteArtWorks)
+      `when`(searchAPI.getAlbums(params)).thenReturn(remoteArtWorks)
       remoteDataImpl.getAlbumsByKeyword(keyword)
-      verify(searchAPI).getArtWorks(params)
+      verify(searchAPI).getAlbums(params)
     }
   }
 
@@ -45,7 +45,7 @@ class RemoteDataImplTest {
   @Test
   fun getTracksByAlbumTitle() {
     runBlockingTest {
-      val remoteArtWorks = ArtWorks(
+      val remoteArtWorks = Albums(
         resultCount = 0,
         results = listOf()
       )
@@ -57,9 +57,9 @@ class RemoteDataImplTest {
         "limit" to "10000"
       )
 
-      `when`(searchAPI.getArtWorks(params)).thenReturn(remoteArtWorks)
+      `when`(searchAPI.getAlbums(params)).thenReturn(remoteArtWorks)
       remoteDataImpl.getTracksByAlbumTitle(albumTitle)
-      verify(searchAPI).getArtWorks(params)
+      verify(searchAPI).getAlbums(params)
     }
   }
 }

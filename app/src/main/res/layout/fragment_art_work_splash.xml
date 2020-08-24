@@ -4,7 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="#ffffff"
-  tools:context=".presentation.screen.artworksplash.view.ArtWorkSplashFragment">
+  tools:context=".presentation.screen.albumsplash.view.AlbumSplashFragment">
 
   <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,

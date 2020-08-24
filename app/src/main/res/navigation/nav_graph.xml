@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/ArtworkListFragment"
-    android:name="idv.chauyan.itunessearch.presentation.screen.artworklist.view.ArtWorkListFragment"
+    android:name="idv.chauyan.itunessearch.presentation.screen.albumlist.view.AlbumListFragment"
     android:label="@string/artwork_list_fragment"
     tools:layout="@layout/fragment_art_work_list" >
     <action
@@ -20,7 +20,7 @@
   </fragment>
   <fragment
     android:id="@+id/ArtWorkDetailFragment"
-    android:name="idv.chauyan.itunessearch.presentation.screen.artworkdetail.view.ArtWorkDetailFragment"
+    android:name="idv.chauyan.itunessearch.presentation.screen.albumdetail.view.AlbumDetailFragment"
     android:label="fragment_art_work_detail"
     tools:layout="@layout/fragment_art_work_detail" >
     <argument
@@ -31,7 +31,7 @@
   </fragment>
   <fragment
     android:id="@+id/ArtWorkSplashFragment"
-    android:name="idv.chauyan.itunessearch.presentation.screen.artworksplash.view.ArtWorkSplashFragment"
+    android:name="idv.chauyan.itunessearch.presentation.screen.albumsplash.view.AlbumSplashFragment"
     android:label="fragment_art_work_splash"
     tools:layout="@layout/fragment_art_work_splash" >
     <action

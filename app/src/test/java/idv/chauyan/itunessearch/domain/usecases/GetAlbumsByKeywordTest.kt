@@ -1,7 +1,7 @@
 package idv.chauyan.itunessearch.domain.usecases
 
 import idv.chauyan.itunessearch.domain.DomainRepository
-import idv.chauyan.itunessearch.domain.model.DomainArtWork
+import idv.chauyan.itunessearch.domain.model.DomainAlbum
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -26,7 +26,7 @@ class GetAlbumsByKeywordTest {
   fun get() {
     runBlockingTest {
 
-      val domainArtWorks = listOf<DomainArtWork>()
+      val domainArtWorks = listOf<DomainAlbum>()
       val keyword = "swift"
 
       `when`(domainRepository.getAlbumsByKeyword(keyword)).thenReturn(domainArtWorks)

@@ -1,6 +1,6 @@
 package idv.chauyan.itunessearch.data
 
-import idv.chauyan.itunessearch.data.model.DataArtWork
+import idv.chauyan.itunessearch.data.model.DataAlbum
 import idv.chauyan.itunessearch.data.respository.RemoteData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -26,7 +26,7 @@ class DataRepositoryTest {
   fun getAlbumsByKeyword() {
     runBlockingTest {
 
-      val dataArtWorks = listOf<DataArtWork>()
+      val dataArtWorks = listOf<DataAlbum>()
       val keyword = "swift"
 
       `when`(remoteData.getAlbumsByKeyword(keyword)).thenReturn(dataArtWorks)
@@ -39,7 +39,7 @@ class DataRepositoryTest {
   fun getTracksByAlbumTitle() {
     runBlockingTest {
 
-      val dataArtWorks = listOf<DataArtWork>()
+      val dataArtWorks = listOf<DataAlbum>()
       val albumTitle = "red"
 
       `when`(remoteData.getTracksByAlbumTitle(albumTitle)).thenReturn(dataArtWorks)
